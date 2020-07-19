@@ -1,0 +1,45 @@
+@(products: List[Product])
+
+@import b3.vertical.fieldConstructor
+
+@main("Product List") {
+    <h1>Product List</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Code</th>
+                <th scope="col">Category</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(product <- products) {
+                <tr>
+                    <td>@product.getId()</td>
+                    <td>@product.getTitle()</td>
+                    <td>@product.getCode()</td>
+                    <td>@product.getCategory()</td>
+                    <td>@product.getDescription()</td>
+                    <td>@product.getPrice()</td>
+                    <td>
+                        <a class="btn btn-primary" href="@internal.routes.ProductController.edit(product.getId())">Edit</a>
+                        <a class="btn btn-danger" onclick="del('@internal.routes.ProductController.delete(product.getId())')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script>
+        function del(url) {
+            if (confirm('Are you sure?')) {
+                fetch(url, { method: 'DELETE' })
+                    .then( () => location.reload() );
+            }
+        }
+    </script>
+}

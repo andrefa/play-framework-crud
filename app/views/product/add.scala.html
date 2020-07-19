@@ -1,0 +1,15 @@
+@(form: Form[Product])
+
+@import b3.vertical.fieldConstructor
+
+@main("Add Product") {
+	@b3.form(internal.routes.ProductController.save) {
+		<h1>Add Product</h1>
+		@b3.text(form("title"), '_label -> "Title")
+		@b3.text(form("code"), '_label -> "Code")
+		@b3.text(form("category"), '_label -> "Category")
+		@b3.textarea(form("description"), '_label -> "Description")
+		@b3.number(form("price"), '_label -> "Price")
+		@b3.submit('class -> "btn btn-primary") { Save }
+	}	
+}

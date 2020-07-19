@@ -1,0 +1,16 @@
+GET  /               controllers.internal.HomeController.index
+
+GET    /product/new               controllers.internal.ProductController.create
+POST   /product/new               controllers.internal.ProductController.save
+GET    /product/:id               controllers.internal.ProductController.edit(id: Long)
+POST   /product/:id               controllers.internal.ProductController.update(id: Long)
+DELETE /product/:id               controllers.internal.ProductController.delete(id: Long)
+
+GET  /products                  controllers.internal.ProductController.list
+
+# API
+GET  /api/products                       controllers.v1.ProductApiController.withFilters
+GET  /api/products/all                   controllers.v1.ProductApiController.all
+GET  /api/products/category/:category    controllers.v1.ProductApiController.ofCategory(category)
+
+GET  /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
